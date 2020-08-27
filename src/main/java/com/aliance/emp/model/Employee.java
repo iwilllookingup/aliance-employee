@@ -18,7 +18,7 @@ import lombok.experimental.Accessors;
 public class Employee {
 
   @Id
-  private Integer id;
+  private int id;
 
   @Column(name = "name")
   private String name;
