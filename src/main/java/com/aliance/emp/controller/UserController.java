@@ -1,5 +1,6 @@
 package com.aliance.emp.controller;
 
+import com.aliance.emp.dto.GetUserResponse;
 import com.aliance.emp.dto.LoginRequest;
 import com.aliance.emp.dto.RegisterRequest;
 import com.aliance.emp.error.UnauthorizedErrorException;
@@ -18,6 +19,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,7 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @ConfigurationProperties("aliance.jwt")
-@RequestMapping("/v1")
+@RequestMapping("/v1/user")
 public class UserController {
 
   @Setter
@@ -58,9 +60,15 @@ public class UserController {
   }
 
   @PostMapping("/register")
-  @ResponseStatus(HttpStatus.OK)
+  @ResponseStatus(HttpStatus.NO_CONTENT)
   public void register(@RequestBody @Valid RegisterRequest request) {
     userService.register(request);
+  }
+
+  @GetMapping("/")
+  @ResponseStatus(HttpStatus.OK)
+  public List<GetUserResponse> getAll() {
+    return userService.getAll();
   }
 
 

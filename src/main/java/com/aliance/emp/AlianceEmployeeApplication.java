@@ -36,8 +36,8 @@ public class AlianceEmployeeApplication {
       http.csrf().disable()
           .addFilterAfter(new JWTAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class)
           .authorizeRequests()
-          .antMatchers(HttpMethod.POST, "/v1/login").permitAll()
-          .antMatchers(HttpMethod.POST, "/v1/register").permitAll()
+          .antMatchers(HttpMethod.POST, "/v1/user/login").permitAll()
+          .antMatchers(HttpMethod.POST, "/v1/user/register").permitAll()
           .anyRequest().authenticated();
     }
   }
